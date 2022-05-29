@@ -35,7 +35,7 @@ void setup()
   Serial.print("start");
   M5.SHT30.Begin();
   //void begin(bool touchEnable = true, bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false);
-  M5.EPD.SetRotation(90);
+  M5.EPD.SetRotation(0); 
   M5.EPD.Clear(true);
 
 
@@ -104,7 +104,7 @@ void loop()
     delay(60000);
   }else{
   WiFi.begin(ssid, password);
-  canvas.createCanvas(540, 960);
+  canvas.createCanvas(960, 540);
   canvas.setTextSize(2);
   canvas.drawString("Connecting to the internet!", 45, 350);
   canvas.pushCanvas(0, 0, UPDATE_MODE_GC16);
@@ -116,9 +116,11 @@ void loop()
   }
 
   //画像出力
-  canvas.createCanvas(540, 960);
+  canvas.createCanvas(960, 540);
   Serial.print("writing image");
   canvas.setTextSize(3);
+  //pngでも出力できるが10秒程度待たされるのでjpgが良い。
+  // canvas.drawPngUrl(jpegUrl);
   canvas.drawJpgUrl(jpegUrl);
 
 
@@ -132,7 +134,7 @@ void loop()
   dtostrf(tem, 2, 2, temStr); //小数点を含む数値を文字列に変換
   dtostrf(hum, 2, 2, humStr);
   canvas.setTextSize(2);
-  canvas.drawString("Batt:" + String(btLevel) + "%   " + "Temp:" + String(temStr) + "*C  " + "Humi:" + String(humStr) + "%", 60, 935);
+  canvas.drawString("Batt:" + String(btLevel) + "%   " + "Temp:" + String(temStr) + "*C  " + "Humi:" + String(humStr) + "%", 0, 0);
 
   // 描画
   canvas.pushCanvas(0, 0, UPDATE_MODE_GC16);
