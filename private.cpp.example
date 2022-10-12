@@ -6,4 +6,7 @@
 
 
 //m5に表示する用の画像のURL
- char*jpegUrl = "https://hogefuga.usuyuki";
+ char *jpegUrl = "https://hogefuga.usuyuki";
+
+//更新する時間 単位(分)
+ int updateCycleMin = 30;
